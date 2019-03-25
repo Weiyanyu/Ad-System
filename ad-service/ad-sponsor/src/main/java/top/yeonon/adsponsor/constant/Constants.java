@@ -15,6 +15,8 @@ public class Constants {
 
         public static final String SAME_UNIT_NAME_ERROR = "同一个推广计划下存在相同名称的推广单元！";
 
+        public static final String SAME_CREATIVE_NAME_ERROR = "同一用户存在相同名称的创意！";
+
         public static final String NOT_FOUND_USER = "没有找到关联的用户！";
 
         public static final String NOT_FOUND_PLAN = "没有找到对应的推广计划！";

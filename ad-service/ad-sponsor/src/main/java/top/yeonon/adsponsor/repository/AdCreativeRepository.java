@@ -11,5 +11,5 @@ import top.yeonon.adsponsor.entity.AdCreative;
 @Repository
 public interface AdCreativeRepository extends JpaRepository<AdCreative, Long> {
 
-
+    AdCreative findByNameAndUserId(String name, Long userId);
 }
