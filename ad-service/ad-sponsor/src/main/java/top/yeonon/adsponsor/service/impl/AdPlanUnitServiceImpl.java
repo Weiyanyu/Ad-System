@@ -8,23 +8,20 @@ import top.yeonon.adcommon.exception.AdException;
 import top.yeonon.adsponsor.constant.Constants;
 import top.yeonon.adsponsor.entity.AdPlan;
 import top.yeonon.adsponsor.entity.AdUnit;
+import top.yeonon.adsponsor.entity.unitCondition.AdCreativeUnit;
 import top.yeonon.adsponsor.entity.unitCondition.AdUnitDistrict;
 import top.yeonon.adsponsor.entity.unitCondition.AdUnitIt;
 import top.yeonon.adsponsor.entity.unitCondition.AdUnitKeyword;
+import top.yeonon.adsponsor.repository.AdCreativeRepository;
 import top.yeonon.adsponsor.repository.AdPlanRepository;
 import top.yeonon.adsponsor.repository.AdUnitRepository;
+import top.yeonon.adsponsor.repository.unitCondition.AdCreativeUnitRepository;
 import top.yeonon.adsponsor.repository.unitCondition.AdUnitDistrictRepository;
 import top.yeonon.adsponsor.repository.unitCondition.AdUnitItRepository;
 import top.yeonon.adsponsor.repository.unitCondition.AdUnitKeywordRepository;
 import top.yeonon.adsponsor.service.IAdPlanUnitService;
-import top.yeonon.adsponsor.vo.request.AdPlanUnitDistrictRequest;
-import top.yeonon.adsponsor.vo.request.AdPlanUnitItRequest;
-import top.yeonon.adsponsor.vo.request.AdPlanUnitKeywordRequest;
-import top.yeonon.adsponsor.vo.request.AdPlanUnitRequest;
-import top.yeonon.adsponsor.vo.response.AdPlanUnitDistrictResponse;
-import top.yeonon.adsponsor.vo.response.AdPlanUnitItResponse;
-import top.yeonon.adsponsor.vo.response.AdPlanUnitKeywordResponse;
-import top.yeonon.adsponsor.vo.response.AdPlanUnitResponse;
+import top.yeonon.adsponsor.vo.request.*;
+import top.yeonon.adsponsor.vo.response.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -51,6 +48,12 @@ public class AdPlanUnitServiceImpl implements IAdPlanUnitService {
 
     @Autowired
     private AdUnitItRepository adUnitItRepository;
+
+    @Autowired
+    private AdCreativeUnitRepository adCreativeUnitRepository;
+
+    @Autowired
+    private AdCreativeRepository adCreativeRepository;
 
     @Override
     public AdPlanUnitResponse createPlanUnit(AdPlanUnitRequest adPlanUnitRequest) throws AdException {
@@ -173,6 +176,47 @@ public class AdPlanUnitServiceImpl implements IAdPlanUnitService {
         return new AdPlanUnitDistrictResponse(ids);
     }
 
+    @Override
+    public AdCreativeUnitResponse createCreativeUnit(AdCreativeUnitRequest adCreativeUnitRequest) throws AdException {
+        if (!adCreativeUnitRequest.createValidate()) {
+            throw new AdException(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
+        }
+
+        Set<Long> creativeIds = adCreativeUnitRequest.getCreativeUnitItems()
+                .stream()
+                .map(AdCreativeUnitRequest.CreativeUnitItem::getCreativeId)
+                .distinct()
+                .collect(Collectors.toSet());
+
+        Set<Long> unitIds = adCreativeUnitRequest.getCreativeUnitItems()
+                .stream()
+                .map(AdCreativeUnitRequest.CreativeUnitItem::getUnitId)
+                .distinct()
+                .collect(Collectors.toSet());
+
+        if (!relateCreativeExist(creativeIds)) {
+            throw new AdException(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
+        }
+
+        if (!relateUnitExist(unitIds)) {
+            throw new AdException(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
+        }
+
+        List<AdCreativeUnit> adCreativeUnits = new ArrayList<>();
+        adCreativeUnitRequest.getCreativeUnitItems()
+                .forEach(creativeUnitItem -> {
+                    adCreativeUnits.add(new AdCreativeUnit(creativeUnitItem.getCreativeId(),
+                                                            creativeUnitItem.getUnitId()));
+                });
+
+        List<Long> ids = adCreativeUnitRepository
+                        .saveAll(adCreativeUnits)
+                        .stream()
+                        .map(AdCreativeUnit::getId)
+                        .collect(Collectors.toList());
+        return new AdCreativeUnitResponse(ids);
+    }
+
     /**
      * 判断依赖的unitId是否存在，有一个不存在则不合法
      * @param unitIds Set集合（为了去重）
@@ -186,5 +230,13 @@ public class AdPlanUnitServiceImpl implements IAdPlanUnitService {
         //找到的对象size和传入的id size一致，则表示unit id都是存在的
         return adUnitRepository.findAllById(unitIds).size()
                 == unitIds.size();
+    }
+
+    private boolean relateCreativeExist(Set<Long> creativeIds) {
+        if (CollectionUtils.isEmpty(creativeIds)) {
+            return false;
+        }
+        return adCreativeRepository.findAllById(creativeIds).size()
+                == creativeIds.size();
     }
 }

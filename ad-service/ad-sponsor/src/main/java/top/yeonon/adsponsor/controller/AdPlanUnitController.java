@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import top.yeonon.adcommon.exception.AdException;
 import top.yeonon.adsponsor.service.IAdPlanUnitService;
-import top.yeonon.adsponsor.vo.request.AdPlanUnitDistrictRequest;
-import top.yeonon.adsponsor.vo.request.AdPlanUnitItRequest;
-import top.yeonon.adsponsor.vo.request.AdPlanUnitKeywordRequest;
-import top.yeonon.adsponsor.vo.request.AdPlanUnitRequest;
+import top.yeonon.adsponsor.vo.request.*;
 import top.yeonon.adsponsor.vo.response.*;
 
 /**
@@ -43,5 +40,9 @@ public class AdPlanUnitController {
         return adPlanUnitService.createDistrict(adPlanUnitDistrictRequest);
     }
 
+    @PostMapping("/relational/creativeUnit")
+    public AdCreativeUnitResponse createCreativeUnit(@RequestBody AdCreativeUnitRequest adCreativeUnitRequest) throws AdException {
+        return adPlanUnitService.createCreativeUnit(adCreativeUnitRequest);
+    }
 
 }

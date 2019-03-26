@@ -2,14 +2,8 @@ package top.yeonon.adsponsor.service;
 
 import top.yeonon.adcommon.exception.AdException;
 import top.yeonon.adsponsor.entity.AdUnit;
-import top.yeonon.adsponsor.vo.request.AdPlanUnitDistrictRequest;
-import top.yeonon.adsponsor.vo.request.AdPlanUnitItRequest;
-import top.yeonon.adsponsor.vo.request.AdPlanUnitKeywordRequest;
-import top.yeonon.adsponsor.vo.request.AdPlanUnitRequest;
-import top.yeonon.adsponsor.vo.response.AdPlanUnitDistrictResponse;
-import top.yeonon.adsponsor.vo.response.AdPlanUnitItResponse;
-import top.yeonon.adsponsor.vo.response.AdPlanUnitKeywordResponse;
-import top.yeonon.adsponsor.vo.response.AdPlanUnitResponse;
+import top.yeonon.adsponsor.vo.request.*;
+import top.yeonon.adsponsor.vo.response.*;
 
 /**
  * @Author yeonon
@@ -51,5 +45,15 @@ public interface IAdPlanUnitService {
      * @throws AdException 可能抛出的异常
      */
     AdPlanUnitDistrictResponse createDistrict(AdPlanUnitDistrictRequest adPlanUnitDistrictRequest)
+        throws AdException;
+
+
+    /**
+     * 创建Creative 和 Unit 的关联记录
+     * @param adCreativeUnitRequest 请求VO对象
+     * @return 响应VO对象
+     * @throws AdException 可能抛出的异常
+     */
+    AdCreativeUnitResponse createCreativeUnit(AdCreativeUnitRequest adCreativeUnitRequest)
         throws AdException;
 }
