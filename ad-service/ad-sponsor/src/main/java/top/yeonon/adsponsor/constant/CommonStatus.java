@@ -6,7 +6,7 @@ package top.yeonon.adsponsor.constant;
  **/
 public enum CommonStatus {
     VALID(1, "有效状态"),
-    INVAILD(0, "无效状态");
+    INVALID(0, "无效状态");
 
     private Integer code;
     private String description;

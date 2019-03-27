@@ -19,7 +19,11 @@ public class GlobalExceptionAdvice {
     @ExceptionHandler(AdException.class)
     public CommonResponse handlerAdException(HttpServletRequest request,
                                              AdException e) {
-        String message = String.format("request uri %s occur an error : %s", request.getRequestURI(), e.getMessage());
+        String message = String.format("request uri %s and method %s occur an error : %s",
+                request.getRequestURI(),
+                request.getMethod(),
+                e.getMessage());
+
         log.info(message);
         return CommonResponse.builder()
                 .code(-1)

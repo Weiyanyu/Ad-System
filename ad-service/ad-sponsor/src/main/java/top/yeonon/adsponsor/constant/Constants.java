@@ -20,7 +20,5 @@ public class Constants {
         public static final String NOT_FOUND_USER = "没有找到关联的用户！";
 
         public static final String NOT_FOUND_PLAN = "没有找到对应的推广计划！";
-
-
     }
 }

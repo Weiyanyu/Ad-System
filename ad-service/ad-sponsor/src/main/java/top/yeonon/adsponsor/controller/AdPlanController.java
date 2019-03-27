@@ -1,11 +1,11 @@
 package top.yeonon.adsponsor.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import top.yeonon.adcommon.exception.AdException;
 import top.yeonon.adsponsor.entity.AdPlan;
 import top.yeonon.adsponsor.service.IAdPlanService;
-import top.yeonon.adsponsor.vo.request.AdPlanGetRequest;
 import top.yeonon.adsponsor.vo.request.AdPlanRequest;
 import top.yeonon.adsponsor.vo.response.AdPlanResponse;
 
@@ -17,6 +17,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/plans")
+@Slf4j
 public class AdPlanController {
 
     @Autowired
@@ -30,10 +31,8 @@ public class AdPlanController {
     }
 
     @GetMapping(value = "{userId}")
-    public List<AdPlan> getPlans(@PathVariable("userId") Long userId,
-                                 @RequestBody AdPlanGetRequest adPlanGetRequest) throws AdException {
-        adPlanGetRequest.setUserId(userId);
-        return adPlanService.getAdPlans(adPlanGetRequest);
+    public List<AdPlan> getPlans(@PathVariable("userId") Long userId) throws AdException {
+        return adPlanService.getAdPlans(userId);
     }
 
     @PutMapping("{userId}/{id}")

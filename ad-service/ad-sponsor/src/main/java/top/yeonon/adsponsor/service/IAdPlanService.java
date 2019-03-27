@@ -2,8 +2,7 @@ package top.yeonon.adsponsor.service;
 
 import top.yeonon.adcommon.exception.AdException;
 import top.yeonon.adsponsor.entity.AdPlan;
-import top.yeonon.adsponsor.repository.AdPlanRepository;
-import top.yeonon.adsponsor.vo.request.AdPlanGetRequest;
+
 import top.yeonon.adsponsor.vo.request.AdPlanRequest;
 import top.yeonon.adsponsor.vo.response.AdPlanResponse;
 
@@ -35,11 +34,11 @@ public interface IAdPlanService {
 
     /**
      * 获取广告计划（批量）
-     * @param adPlanGetRequest 广告计划获取VO对象
+     * @param userId 用户ID
      * @return 响应VO对象
      * @throws AdException 可能抛出的异常
      */
-    List<AdPlan> getAdPlans(AdPlanGetRequest adPlanGetRequest)
+    List<AdPlan> getAdPlans(Long userId)
         throws AdException;
 
     /**

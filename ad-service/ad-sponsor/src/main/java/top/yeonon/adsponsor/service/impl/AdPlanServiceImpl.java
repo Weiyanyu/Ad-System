@@ -12,7 +12,6 @@ import top.yeonon.adsponsor.repository.AdPlanRepository;
 import top.yeonon.adsponsor.repository.AdUserRepository;
 import top.yeonon.adsponsor.service.IAdPlanService;
 import top.yeonon.adsponsor.utils.CommonUtils;
-import top.yeonon.adsponsor.vo.request.AdPlanGetRequest;
 import top.yeonon.adsponsor.vo.request.AdPlanRequest;
 import top.yeonon.adsponsor.vo.response.AdPlanResponse;
 
@@ -108,14 +107,13 @@ public class AdPlanServiceImpl implements IAdPlanService {
     }
 
     @Override
-    public List<AdPlan>getAdPlans(AdPlanGetRequest adPlanGetRequest) throws AdException {
-        if (!adPlanGetRequest.validate()) {
+    public List<AdPlan> getAdPlans(Long userId) throws AdException {
+        if (userId == null) {
             throw new AdException(Constants.ErrorMsg.REQUEST_PARAM_ERROR);
         }
 
         return adPlanRepository.
-                findAllByIdInAndUserId(adPlanGetRequest.getIds(),
-                        adPlanGetRequest.getUserId());
+                findAllByUserId(userId);
 
     }
 
@@ -135,7 +133,7 @@ public class AdPlanServiceImpl implements IAdPlanService {
 
         //这里的删除只是设置状态为非法状态，并不是真的从数据库里删除对象
         //可以开启一个定时任务定期的清理无效记录
-        adPlan.setPlanStatus(CommonStatus.INVAILD.getCode());
+        adPlan.setPlanStatus(CommonStatus.INVALID.getCode());
         adPlan.setUpdateTime(new Date());
         adPlanRepository.save(adPlan);
     }
