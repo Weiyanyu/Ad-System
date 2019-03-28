@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @Entity
-@Table(name = "creative_unit")
+@Table(name = "ad_creative_unit")
 public class AdCreativeUnit {
 
     @Id

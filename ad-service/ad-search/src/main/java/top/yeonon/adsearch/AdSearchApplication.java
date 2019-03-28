@@ -8,6 +8,9 @@ import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboar
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 @SpringCloudApplication
 //@EnableEurekaClient
 @EnableFeignClients
