@@ -46,7 +46,7 @@ public class DataTable implements ApplicationContextAware, PriorityOrdered {
     }
 
     private static <T> T bean(String beanName) {
-        return (T)applicationContext.getBean(beanName);
+        return (T) applicationContext.getBean(beanName);
     }
 
     private static <T> T bean(Class<T> clz) {

@@ -8,7 +8,6 @@ import top.yeonon.adcommon.vo.CommonResponse;
 import top.yeonon.adsearch.client.feign.AdSponsorClient;
 
 
-
 /**
  * @Author yeonon
  * @date 2019/3/27 0027 10:33

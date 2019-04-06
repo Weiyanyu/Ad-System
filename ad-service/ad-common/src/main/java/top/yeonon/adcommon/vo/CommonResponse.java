@@ -15,7 +15,8 @@ public class CommonResponse implements Serializable {
     private String message;
     private Object data;
 
-    private CommonResponse() {}
+    private CommonResponse() {
+    }
 
     private CommonResponse(Integer code, String message, Object data) {
         this.code = code;
@@ -23,7 +24,7 @@ public class CommonResponse implements Serializable {
         this.data = data;
     }
 
-    public static  CommonResponseBuilder builder() {
+    public static CommonResponseBuilder builder() {
         return new CommonResponseBuilder();
     }
 

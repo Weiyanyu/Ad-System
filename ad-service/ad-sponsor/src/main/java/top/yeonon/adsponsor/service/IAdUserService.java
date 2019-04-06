@@ -11,5 +11,5 @@ import top.yeonon.adsponsor.vo.response.CreateAdUserResponse;
 public interface IAdUserService {
 
     CreateAdUserResponse createAdUser(CreateAdUserRequest createAdUserRequest)
-        throws AdException;
+            throws AdException;
 }

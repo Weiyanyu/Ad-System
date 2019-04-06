@@ -19,6 +19,7 @@ public class CommonUtils {
 
     /**
      * 将String值转换成MD5值
+     *
      * @param value String值
      * @return MD5值
      */
@@ -28,6 +29,7 @@ public class CommonUtils {
 
     /**
      * 将String类型的时间转换成Java Date对象
+     *
      * @param dateStr String类型表示的时间
      * @return Java Date对象
      */

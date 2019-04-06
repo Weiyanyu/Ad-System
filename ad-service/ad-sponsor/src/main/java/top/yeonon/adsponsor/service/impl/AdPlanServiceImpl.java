@@ -49,7 +49,7 @@ public class AdPlanServiceImpl implements IAdPlanService {
         }
 
         AdPlan oldPlan = adPlanRepository.findByUserIdAndPlanName(adPlanRequest.getUserId(),
-                                adPlanRequest.getPlanName());
+                adPlanRequest.getPlanName());
         //业务中同一用户不允许存在相同的计划名称
         if (oldPlan != null) {
             throw new AdException(Constants.ErrorMsg.SAME_PLAN_NAME_ERROR);

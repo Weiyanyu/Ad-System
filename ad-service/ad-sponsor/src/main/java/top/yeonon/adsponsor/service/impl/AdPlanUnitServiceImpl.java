@@ -67,16 +67,16 @@ public class AdPlanUnitServiceImpl implements IAdPlanUnitService {
         }
 
         AdUnit oldUnit = adUnitRepository.findByPlanIdAndUnitName(adPlanUnitRequest.getPlanId(),
-                                                                    adPlanUnitRequest.getUnitName());
+                adPlanUnitRequest.getUnitName());
         if (oldUnit != null) {
             throw new AdException(Constants.ErrorMsg.SAME_UNIT_NAME_ERROR);
         }
 
         AdUnit newUnit = adUnitRepository.save(
                 new AdUnit(adPlanUnitRequest.getPlanId(),
-                            adPlanUnitRequest.getUnitName(),
-                            adPlanUnitRequest.getPositionType(),
-                            adPlanUnitRequest.getBudget())
+                        adPlanUnitRequest.getUnitName(),
+                        adPlanUnitRequest.getPositionType(),
+                        adPlanUnitRequest.getBudget())
         );
 
         return new AdPlanUnitResponse(newUnit.getId(), newUnit.getUnitName());
@@ -102,7 +102,7 @@ public class AdPlanUnitServiceImpl implements IAdPlanUnitService {
         List<AdUnitKeyword> adUnitKeywords = new ArrayList<>();
         adPlanUnitKeywordRequest.getUnitKeywords()
                 .forEach(unitKeyword -> {
-                    adUnitKeywords.add(new AdUnitKeyword(unitKeyword.getUnitId(),unitKeyword.getKeyword()));
+                    adUnitKeywords.add(new AdUnitKeyword(unitKeyword.getUnitId(), unitKeyword.getKeyword()));
                 });
 
         //存入数据库，并将返回的对象映射成id list
@@ -206,19 +206,20 @@ public class AdPlanUnitServiceImpl implements IAdPlanUnitService {
         adCreativeUnitRequest.getCreativeUnitItems()
                 .forEach(creativeUnitItem -> {
                     adCreativeUnits.add(new AdCreativeUnit(creativeUnitItem.getCreativeId(),
-                                                            creativeUnitItem.getUnitId()));
+                            creativeUnitItem.getUnitId()));
                 });
 
         List<Long> ids = adCreativeUnitRepository
-                        .saveAll(adCreativeUnits)
-                        .stream()
-                        .map(AdCreativeUnit::getId)
-                        .collect(Collectors.toList());
+                .saveAll(adCreativeUnits)
+                .stream()
+                .map(AdCreativeUnit::getId)
+                .collect(Collectors.toList());
         return new AdCreativeUnitResponse(ids);
     }
 
     /**
      * 判断依赖的unitId是否存在，有一个不存在则不合法
+     *
      * @param unitIds Set集合（为了去重）
      * @return true/false
      */

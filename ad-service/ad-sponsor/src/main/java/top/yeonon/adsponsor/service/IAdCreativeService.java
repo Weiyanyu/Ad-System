@@ -12,10 +12,11 @@ public interface IAdCreativeService {
 
     /**
      * 创建推广创意
+     *
      * @param adCreativeRequest 请求VO对象
      * @return 响应VO对象
      * @throws AdException 可能抛出的异常
      */
     AdCreativeResponse createCreative(AdCreativeRequest adCreativeRequest)
-        throws AdException;
+            throws AdException;
 }

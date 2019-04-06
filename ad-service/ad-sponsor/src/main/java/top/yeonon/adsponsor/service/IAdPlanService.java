@@ -16,36 +16,40 @@ public interface IAdPlanService {
 
     /**
      * 创建推广计划
+     *
      * @param adPlanRequest 请求VO对象
      * @return 响应VO对象
      * @throws AdException 自定义广告系统异常
      */
     AdPlanResponse createAdPlan(AdPlanRequest adPlanRequest)
-        throws AdException;
+            throws AdException;
 
     /**
      * 更新推广计划
+     *
      * @param adPlanRequest 请求VO对象
      * @return 响应VO对象
      * @throws AdException 自定义广告系统异常
      */
     AdPlanResponse updateAdPlan(AdPlanRequest adPlanRequest)
-        throws AdException;
+            throws AdException;
 
     /**
      * 获取广告计划（批量）
+     *
      * @param userId 用户ID
      * @return 响应VO对象
      * @throws AdException 可能抛出的异常
      */
     List<AdPlan> getAdPlans(Long userId)
-        throws AdException;
+            throws AdException;
 
     /**
      * 删除广告计划
+     *
      * @param adPlanRequest 广告计划请求VO对象
      * @throws AdException 可能抛出的异常
      */
     void deleteAdPlan(AdPlanRequest adPlanRequest)
-        throws AdException;
+            throws AdException;
 }

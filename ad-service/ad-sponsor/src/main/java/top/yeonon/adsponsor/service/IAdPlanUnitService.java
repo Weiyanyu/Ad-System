@@ -13,47 +13,52 @@ public interface IAdPlanUnitService {
 
     /**
      * 创建推广计划单元
+     *
      * @param adPlanUnitRequest 请求VO对象
      * @return 响应VO对象
      * @throws AdException 可能抛出的异常
      */
     AdPlanUnitResponse createPlanUnit(AdPlanUnitRequest adPlanUnitRequest)
-        throws AdException;
+            throws AdException;
 
     /**
      * 创建关键字约束
+     *
      * @param adPlanUnitKeywordRequest 请求VO对象
      * @return 响应VO对象
      * @throws AdException 可能抛出的异常
      */
     AdPlanUnitKeywordResponse createKeyword(AdPlanUnitKeywordRequest adPlanUnitKeywordRequest)
-        throws AdException;
+            throws AdException;
 
     /**
      * 创建兴趣约束
+     *
      * @param adPlanUnitItRequest 请求VO对象
      * @return 响应VO对象
      * @throws AdException 可能抛出的异常
      */
     AdPlanUnitItResponse createIt(AdPlanUnitItRequest adPlanUnitItRequest)
-        throws AdException;
+            throws AdException;
 
     /**
      * 创建地域约束
+     *
      * @param adPlanUnitDistrictRequest 请求VO对象
      * @return 响应VO对象
      * @throws AdException 可能抛出的异常
      */
     AdPlanUnitDistrictResponse createDistrict(AdPlanUnitDistrictRequest adPlanUnitDistrictRequest)
-        throws AdException;
+            throws AdException;
 
 
     /**
      * 创建Creative 和 Unit 的关联记录
+     *
      * @param adCreativeUnitRequest 请求VO对象
      * @return 响应VO对象
      * @throws AdException 可能抛出的异常
      */
     AdCreativeUnitResponse createCreativeUnit(AdCreativeUnitRequest adCreativeUnitRequest)
-        throws AdException;
+            throws AdException;
 }
